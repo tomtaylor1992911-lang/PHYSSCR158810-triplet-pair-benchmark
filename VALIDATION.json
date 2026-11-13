@@ -1,0 +1,28 @@
+{
+  "tested_environment": {
+    "python": "3.13.14",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "matplotlib": "3.11.1",
+  "population_comparisons": 15,
+  "population_generators": 30,
+  "all_eight_reference_metrics_pass": true,
+  "max_relative_difference_from_retained_reference": 0.0,
+  "reference_comparison_tolerances": {
+    "relative": 1e-09,
+    "absolute": 1e-12
+  },
+  "pilot_V6_N96_reproduced_separately": true,
+  "finite_ring_eigensolves": 72,
+  "finite_ring_matrix_elements": 48,
+  "finite_ring_finest_gate_pass": true,
+  "retained_coarse_ring_failures": 2,
+  "finite_ring_finest_max_abs_error": 1.5437096899544918e-15,
+  "diagnostic_plot_exported": [
+    "PNG",
+    "PDF",
+    "SVG"
+  ],
+  "scope": "Portable release execution checked against frozen reference outputs on this environment. No new physical cases, exact open-system validation, or cross-platform guarantee is claimed."
+}

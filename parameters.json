@@ -1,0 +1,257 @@
+{
+  "units": {
+    "energy": "t0",
+    "length": "a",
+    "time": "hbar/t0",
+    "working": "t0=a=hbar=kB=1"
+  },
+  "scope": "One triplet bound pair; same dispersion/bath/initial state within each projected-vs-local comparison.",
+  "electronic_model": "H=-sum_j t0*(1+beta*u_j)*T_j - V*sum_j A_j^dagger*A_j; V excludes attraction from explicitly retained coordinates.",
+  "dispersion": "E(K)=-V-4*t0^2/V*cos(K/2)^2",
+  "gauge": "periodic cell gauge; evaluate unwrapped K+Q in closed projected formula; no abs(z)",
+  "bath": {
+    "coordinate": "u_j=epsilon*X_j, independent identical bosonic continuum baths",
+    "zero_T_normalization": "integral_0^Ec f(E)dE=1; <X_j^2>_T0=1",
+    "f_unnormalized": "gamma*E/((E^2-Omega^2)^2+gamma^2*E^2)*(1-(E/Ec)^2)^4 for 0<E<Ec; zero outside",
+    "S_energy_plus": "2*pi*epsilon^2*f(E)*(n_B(E)+1)",
+    "S_energy_minus": "2*pi*epsilon^2*f(E)*n_B(E)",
+    "S_zero": "2*pi*epsilon^2*T*lim_{E->0+} f(E)/E",
+    "tau_B": "integral_0^infinity abs(C_u(t))dt/C_u(0)",
+    "frequency_energy_units": "S_energy(E)=S_frequency(E/hbar)/hbar",
+    "additional_electronic_delta_broadening": false,
+    "new_assumptions": [
+      "continuous coordinate spectrum",
+      "low-frequency tail",
+      "identical independent local baths",
+      "hard support of final coordinate spectrum"
+    ]
+  },
+  "initial_total_state": "rho_S(0) tensor rho_B; rho_B thermal and translation invariant",
+  "population_rate_natural_units": "|g(K_i,K_f-K_i)|^2*S_u(E_i-E_f)/N for f != i",
+  "population_rate_restored_units": "|g|^2*S_energy(E_i-E_f)/(N*hbar)",
+  "observables": {
+    "R_v": "<v(t)>/<v(0)>; v=(W/2)*sin(K) in natural units",
+    "tau_v": "integral_0^infinity R_v(t)dt; nonfinite if velocity overlaps any nondecaying zero mode",
+    "eta_tau": "abs(tau_local/tau_projected-1)",
+    "eta_R": "sup_0<=t<=5*tau_projected abs(R_local(t)-R_projected(t)) on same time axis"
+  },
+  "gates": {
+    "band_protection": "V>4*t0 and Ec<V-4*t0; single-bath-quantum second-order protection only",
+    "weak_scale": "actual Gamma_max*tau_B < 0.01; not a rigorous Markov error theorem",
+    "rms_margin": "4*t0*beta*u_rms/(V-4*t0-Ec)<0.05; diagnostic only",
+    "vertex_identity_normalized_residual": 1e-12,
+    "generator_conservation_KMS_stationary_rate_scaled_residual": 1e-12,
+    "probability_normalization_drift": 1e-10,
+    "probability_negative_roundoff_floor": -1e-12,
+    "tau_grid_relative_change_max": 0.005,
+    "R_grid_absolute_difference_max": 0.002,
+    "Fock_sizes": [
+      24,
+      36,
+      48
+    ],
+    "Fock_requirement": "actual translation-resolved eigenstates; record residual, phase alignment and finite-size trend",
+    "Fock_absolute_vertex_error_in_t0": 1e-09,
+    "Fock_error_normalized_by_4_abs_beta_t0sq_over_V": 1e-08,
+    "series_pair_terms": [
+      32,
+      64
+    ],
+    "connectivity": "Check graph without arbitrary rate pruning and velocity projection on all zero modes before tau."
+  },
+  "classification": {
+    "operational_usable": "both eta_tau and eta_R <= .05, all gates passed",
+    "resolved_difference": "either >= .10 and numerical uncertainty clearly smaller",
+    "gray": "otherwise between the two criteria; retain continuous values",
+    "undetermined": "nonfinite tau, unconverged numerics, or physical approximation conditions failed",
+    "not_a_novelty_verdict": true
+  },
+  "zero_process_checks": [
+    "epsilon=0",
+    "beta=0",
+    "Q=0 only"
+  ],
+  "zero_process_expected": "L_population=0, R_v=1, tau_v nonfinite; do not use pseudoinverse zero as tau",
+  "cases": [
+    {
+      "case_id": "MAIN_V6",
+      "role": "main",
+      "t0": 1.0,
+      "V": 6,
+      "W": 0.6666666666666666,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.002,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 1.1,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        96,
+        192,
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "T": 0.16666666666666666,
+      "Omega": 0.3333333333333333,
+      "gamma": 0.16666666666666666,
+      "Ec": 0.7333333333333334,
+      "global_gap_lower_bound": 2,
+      "cutoff_margin": 1.2666666666666666,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    },
+    {
+      "case_id": "MAIN_V5",
+      "role": "main",
+      "t0": 1.0,
+      "V": 5,
+      "W": 0.8,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.002,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 1.1,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        96,
+        192,
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "T": 0.2,
+      "Omega": 0.4,
+      "gamma": 0.2,
+      "Ec": 0.8800000000000001,
+      "global_gap_lower_bound": 1,
+      "cutoff_margin": 0.11999999999999988,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    },
+    {
+      "case_id": "MAIN_V8",
+      "role": "main",
+      "t0": 1.0,
+      "V": 8,
+      "W": 0.5,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.002,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 1.1,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        96,
+        192,
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "T": 0.125,
+      "Omega": 0.25,
+      "gamma": 0.125,
+      "Ec": 0.55,
+      "global_gap_lower_bound": 4,
+      "cutoff_margin": 3.45,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    },
+    {
+      "case_id": "MAIN_V12",
+      "role": "main",
+      "t0": 1.0,
+      "V": 12,
+      "W": 0.3333333333333333,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.002,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 1.1,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        96,
+        192,
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "T": 0.08333333333333333,
+      "Omega": 0.16666666666666666,
+      "gamma": 0.08333333333333333,
+      "Ec": 0.3666666666666667,
+      "global_gap_lower_bound": 8,
+      "cutoff_margin": 7.633333333333333,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    },
+    {
+      "case_id": "CONTROL_V6_EPS_HALF",
+      "role": "control",
+      "t0": 1.0,
+      "V": 6,
+      "W": 0.6666666666666666,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.001,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 1.1,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "conditional_grid_check": "Repeat previous fine grid if cutoff changes connectivity, classification is near a threshold, or numerical accuracy is insufficient.",
+      "T": 0.16666666666666666,
+      "Omega": 0.3333333333333333,
+      "gamma": 0.16666666666666666,
+      "Ec": 0.7333333333333334,
+      "global_gap_lower_bound": 2,
+      "cutoff_margin": 1.2666666666666666,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    },
+    {
+      "case_id": "CONTROL_V6_CUTOFF",
+      "role": "control",
+      "t0": 1.0,
+      "V": 6,
+      "W": 0.6666666666666666,
+      "beta": 0.3,
+      "epsilon_zero_T_rms": 0.002,
+      "T_over_W": 0.25,
+      "Omega_over_W": 0.5,
+      "gamma_over_W": 0.25,
+      "Ec_over_W": 0.9,
+      "kernels": [
+        "projected",
+        "local_second_order"
+      ],
+      "grids": [
+        192,
+        384
+      ],
+      "environment_scope": "fixed dimensionless environment family across V",
+      "conditional_grid_check": "Repeat previous fine grid if cutoff changes connectivity, classification is near a threshold, or numerical accuracy is insufficient.",
+      "T": 0.16666666666666666,
+      "Omega": 0.3333333333333333,
+      "gamma": 0.16666666666666666,
+      "Ec": 0.6,
+      "global_gap_lower_bound": 2,
+      "cutoff_margin": 1.4,
+      "initial_distribution": "pi(K)*(1+0.20*sin(K)); pi=exp(-(E-Emin)/T)/Z"
+    }
+  ],
+  "release_scope": "Inputs for the actually reported four main cases and two controls. No additional physical cases are implied."
+}
