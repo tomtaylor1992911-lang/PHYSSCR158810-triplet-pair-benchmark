@@ -15,3 +15,7 @@ This portable code distribution is derived from the validated numerical implemen
 | `finite_ring.py` | `run_fock_validation.py`; SHA-256 `ed0b281d24729245e627c41b661e302f763e0085e31ee6126ba010ef2bc9c94b` | Core basis, Hamiltonian, phase, eigensolver and matrix-element functions copied verbatim. Compact independent CLI removes local historical gate-file metadata and retains coarse failures. |
 
 The full bath-validation snapshot limitation and coarse-ring failures are retained in the README. The portable CLI does not claim to execute the original historical preflight release-file chain; instead it runs the same numerical gates on every fresh population solve.
+
+## Complete data archive
+
+The original complete data ZIP is now publicly available as the named asset in [release data-v2](https://github.com/tomtaylor1992911-lang/PHYSSCR158810-triplet-pair-benchmark/releases/tag/data-v2). The ZIP bytes and internal manifest are unchanged. Its historical local-only availability statement is superseded by the release; the documented missing earlier bath-validation JSON remains a provenance limitation. See the release notes for the file size and SHA-256.
